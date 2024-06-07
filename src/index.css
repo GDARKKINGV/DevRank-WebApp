@@ -70,3 +70,24 @@
       background-color: hsl(var(--secondary));; /* Color del pulgar */
       border-radius: 5px; /* Borde redondeado del pulgar */
     }
+
+    .navbar-link {
+      position: relative;
+    }
+    
+    .navbar-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; /* Ajustar según sea necesario */
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: hsl(var(--primary)); /* Cambia al color que desees */
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-link.active::after {
+      left: 0;
+      width: 100%;
+    }
+    

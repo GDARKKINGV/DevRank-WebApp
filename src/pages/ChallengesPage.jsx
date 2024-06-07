@@ -48,7 +48,7 @@ export default function ChallengesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {challenges.length === 0
             ? Array.from({ length: 6 }).map((_, index) => (
-                <Card key={index}>
+                <Card key={index} className="relative">
                   <CardHeader className="flex flex-col md:flex-row items-start md:items-center gap-4 p-6">
                     <div className="flex items-center gap-4">
                       <div className="grid gap-1">
@@ -68,22 +68,25 @@ export default function ChallengesPage() {
               ))
             : challenges.map((challenge) => (
                 <Card key={challenge._id}>
-                  <CardHeader className="flex flex-col md:flex-row items-start md:items-center gap-4 p-6">
-                    <div className="flex items-center gap-4">
-                      <div className="grid gap-1">
-                        <CardTitle>{challenge.title}</CardTitle>
-                        <CardDescription>
-                          {challenge.description}
-                        </CardDescription>
+                  <CardHeader>
+                    <CardTitle>{challenge.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex flex-col md:flex-row items-start md:items-center">
+                    <CardDescription>{challenge.description}</CardDescription>
+
+                    <Badge
+                      variant="outline"
+                      className={`border-${challenge.color}-600 bg-white dark:bg-gray-950 text-sm`}
+                    >
+                      {challenge.difficulty}
+                    </Badge>
+                  </CardContent>
+                  <CardContent className="p-6 grid gap-4">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <span className="icon-[mdi--star]"></span>{" "}
+                        {challenge.points} points
                       </div>
-                    </div>
-                    <div className="flex items-center gap-2 ml-auto">
-                      <Badge
-                        variant="outline"
-                        className={`border-${challenge.color}-600 bg-white dark:bg-gray-950`}
-                      >
-                        {challenge.difficulty}
-                      </Badge>
                       <Button
                         variant="outline"
                         className="px-4 py-2 rounded-lg"
@@ -92,14 +95,6 @@ export default function ChallengesPage() {
                           Start
                         </Link>
                       </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6 grid gap-4">
-                    <div className="flex items-center gap-4 text-sm">
-                      <div className="flex items-center gap-1">
-                        <span className="icon-[mdi--trophy]"></span>
-                        {challenge.points} points
-                      </div>
                     </div>
                   </CardContent>
                 </Card>

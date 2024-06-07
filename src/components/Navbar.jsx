@@ -1,5 +1,5 @@
 import { ModeToggle } from "./mode-toggle";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -16,6 +16,10 @@ import { Button } from "./ui/button";
 export default function Navbar() {
   const { logout, user } = useAuth();
   const [toggleMenu, setToggleMenu] = useState(false);
+  const location = useLocation(); // Obtener la ubicación actual
+
+  // Definir una función que verifique si la ruta actual coincide con la ruta del link
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav>
@@ -27,22 +31,36 @@ export default function Navbar() {
         </div>
 
         <div className="hidden sm:flex gap-8 items-center">
-          <Link
-            to="/home"
-            className="icon-[mdi--home] text-3xl hover:text-secondary"
-          ></Link>
-          <Link
-            to="/offers"
-            className="icon-[mdi--briefcase] text-2xl hover:text-secondary"
-          ></Link>
-          <Link
-            to="/challenges"
-            className="icon-[mdi--terminal] text-2xl hover:text-secondary"
-          ></Link>
-          <Link
-            to="/leaderboard"
-            className="icon-[mdi--trophy] text-2xl hover:text-secondary"
-          ></Link>
+          <div className={`navbar-link ${isActive("/home") ? "active" : ""}`}>
+            <Link
+              to="/home"
+              className="icon-[mdi--home] text-2xl hover:text-secondary"
+            ></Link>
+          </div>
+          <div className={`navbar-link ${isActive("/offers") ? "active" : ""}`}>
+            <Link
+              to="/offers"
+              className="icon-[mdi--briefcase] text-2xl hover:text-secondary"
+            ></Link>
+          </div>
+          <div
+            className={`navbar-link ${isActive("/challenges") ? "active" : ""}`}
+          >
+            <Link
+              to="/challenges"
+              className="icon-[mdi--terminal] text-2xl hover:text-secondary"
+            ></Link>
+          </div>
+          <div
+            className={`navbar-link ${
+              isActive("/leaderboard") ? "active" : ""
+            }`}
+          >
+            <Link
+              to="/leaderboard"
+              className="icon-[mdi--trophy] text-2xl hover:text-secondary"
+            ></Link>
+          </div>
         </div>
 
         <div className="hidden sm:flex gap-8 items-center">
@@ -98,44 +116,68 @@ export default function Navbar() {
       >
         <div className="flex flex-col gap-12 text-left px-10 py-24">
           <div className="flex flex-col gap-8">
-            <Link
-              to="/home"
-              className="flex items-center text-4xl hover:text-secondary"
+            <div className={`navbar-link ${isActive("/home") ? "active" : ""}`}>
+              <Link
+                to="/home"
+                className="flex items-center text-4xl hover:text-secondary"
+              >
+                <span className="icon-[mdi--home] mr-2"></span> Home
+              </Link>
+            </div>
+            <div
+              className={`navbar-link ${isActive("/offers") ? "active" : ""}`}
             >
-              <span className="icon-[mdi--home] mr-2"></span> Home
-            </Link>
-            <Link
-              to="/offers"
-              className="flex items-center text-4xl hover:text-secondary"
+              <Link
+                to="/offers"
+                className="flex items-center text-4xl hover:text-secondary"
+              >
+                <span className="icon-[mdi--briefcase] mr-2"></span> Offers
+              </Link>
+            </div>
+            <div
+              className={`navbar-link ${
+                isActive("/challenges") ? "active" : ""
+              }`}
             >
-              <span className="icon-[mdi--briefcase] mr-2"></span> Offers
-            </Link>
-            <Link
-              to="/challenges"
-              className="flex items-center text-4xl hover:text-secondary"
+              <Link
+                to="/challenges"
+                className="flex items-center text-4xl hover:text-secondary"
+              >
+                <span className="icon-[mdi--terminal] mr-2"></span> Challenges
+              </Link>
+            </div>
+            <div
+              className={`navbar-link ${
+                isActive("/leaderboard") ? "active" : ""
+              }`}
             >
-              <span className="icon-[mdi--terminal] mr-2"></span> Challenges
-            </Link>
-            <Link
-              to="/leaderboard"
-              className="flex items-center text-4xl hover:text-secondary"
-            >
-              <span className="icon-[mdi--trophy] mr-2"></span> Leaderboard
-            </Link>
+              <Link
+                to="/leaderboard"
+                className="flex items-center text-4xl hover:text-secondary"
+              >
+                <span className="icon-[mdi--trophy] mr-2"></span> Leaderboard
+              </Link>
+            </div>
           </div>
 
           {user ? (
             <div className="flex flex-col gap-8">
-              <Link
-                to="/profile"
-                className="flex items-center text-4xl hover:text-secondary"
+              <div
+                className={`navbar-link ${
+                  isActive("/profile") ? "active" : ""
+                }`}
               >
-                <Avatar className="mr-2">
-                  <AvatarImage src={user.profileImage.url} />
-                  <AvatarFallback>{user.userName[0]}</AvatarFallback>
-                </Avatar>
-                Profile
-              </Link>
+                <Link
+                  to="/profile"
+                  className="flex items-center text-4xl hover:text-secondary"
+                >
+                  <Avatar className="mr-2">
+                    <AvatarImage src={user.profileImage.url} />
+                    <AvatarFallback>{user.userName[0]}</AvatarFallback>
+                  </Avatar>
+                  Profile
+                </Link>
+              </div>
               <button
                 onClick={logout}
                 className="flex items-center text-4xl hover:text-secondary"
@@ -146,21 +188,33 @@ export default function Navbar() {
           ) : (
             <div className="flex flex-col gap-8">
               <Button>
-                <Link
-                  to="/login"
-                  className="flex items-center text-4xl hover:text-secondary"
+                <div
+                  className={`navbar-link ${
+                    isActive("/login") ? "active" : ""
+                  }`}
                 >
-                  <span className="icon-[mdi--login] mr-2"></span> Log In
-                </Link>
+                  <Link
+                    to="/login"
+                    className="flex items-center text-4xl hover:text-secondary"
+                  >
+                    <span className="icon-[mdi--login] mr-2"></span> Log In
+                  </Link>
+                </div>
               </Button>
               <Button>
-                <Link
-                  to="/register"
-                  className="flex items-center text-4xl hover:text-secondary"
+                <div
+                  className={`navbar-link ${
+                    isActive("/register") ? "active" : ""
+                  }`}
                 >
-                  <span className="icon-[mdi--account-plus] mr-2"></span>{" "}
-                  Register
-                </Link>
+                  <Link
+                    to="/register"
+                    className="flex items-center text-4xl hover:text-secondary"
+                  >
+                    <span className="icon-[mdi--account-plus] mr-2"></span>{" "}
+                    Register
+                  </Link>
+                </div>
               </Button>
             </div>
           )}

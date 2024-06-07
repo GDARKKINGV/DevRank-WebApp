@@ -7,6 +7,7 @@ import OffersPage from "./pages/OffersPage";
 import ChallengesPage from "./pages/ChallengesPage";
 import LeaderboardPage from "./pages/LeaderboardPage";
 import ChallengesDevPage from "./pages/ChallengesDevPage";
+import DevProfilePage from "./pages/DevProfilePage";
 
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -25,6 +26,7 @@ export default function App() {
           path="/challenges-dev/:challengeId"
           element={<ChallengesDevPage />}
         />
+        <Route path="/dev-profile/:userId" element={<DevProfilePage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
       </Route>
     </Routes>

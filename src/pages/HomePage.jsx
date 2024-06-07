@@ -28,10 +28,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="py-20 md:py-28 px-8 md:px-8">
+      <section className="py-8 md:py-16 px-8 md:px-8">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8">
           <div className="space-y-4 text-center">
-            <span className="icon-[mdi--briefcase]"></span>
+            <span className="icon-[mdi--briefcase] text-3xl"></span>
 
             <h3 className="text-2xl font-bold">Thousands of Jobs</h3>
             <p className="text-gray-600 dark:text-gray-400">
@@ -40,7 +40,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="space-y-4 text-center">
-            <span className="icon-[mdi--code]"></span>
+            <span className="icon-[mdi--terminal] text-3xl"></span>
 
             <h3 className="text-2xl font-bold">Coding Challenges</h3>
             <p className="text-gray-600 dark:text-gray-400">
@@ -48,7 +48,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="space-y-4 text-center">
-            <span className="icon-[mdi--trophy]"></span>
+            <span className="icon-[mdi--trophy] text-3xl"></span>
 
             <h3 className="text-2xl font-bold">Rank and Reputation</h3>
             <p className="text-gray-600 dark:text-gray-400">

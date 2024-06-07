@@ -5,3 +5,6 @@ const API_URL = "/api/challenges";
 export const getChallengesRequest = () => axiosChallenges.get(API_URL);
 export const getChallengeByIdRequest = (id) =>
   axiosChallenges.get(`${API_URL}/${id}`);
+
+export const runCodeRequest = (requestPayload) =>
+  axiosChallenges.post("/api/development", requestPayload);

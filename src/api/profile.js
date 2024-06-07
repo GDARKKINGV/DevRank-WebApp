@@ -8,3 +8,6 @@ export const updateProfileRequest = (data) =>
       "Content-Type": "multipart/form-data",
     },
   });
+
+export const getUserProfileRequest = (userId) =>
+  axiosUsers.get(`${API_URL}/${userId}`);
